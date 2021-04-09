@@ -1,0 +1,63 @@
+.title-film {
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  color: #ee6e73;
+}
+.info-container {
+  margin-left: 200px;
+}
+.box {
+  display: block;
+  margin-top: 20px;
+}
+.box-overview {
+  display: flex;
+  align-items: flex-start;
+}
+.title-overview {
+  color: #ee6e73;
+  font-size: 25px;
+  font-weight: bold;
+}
+.value-overview {
+  margin-left: 15px;
+  margin-top: 4px;
+  font-size: 20px;
+}
+.p1 {
+  color: #ee6e73;
+  font-size: 25px;
+  font-weight: bold;
+}
+.p2 {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.recommendation {
+  padding-top: 100px;
+}
+
+.title-recommendation {
+  padding-top: 50px;
+  text-align: center;
+  color: #ee6e73;
+}
+
+.many-details {
+  color: rgb(73, 134, 13);
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.few-details {
+  color: rgb(185, 5, 5);
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.ganres {
+  margin-right: 10px;
+}
