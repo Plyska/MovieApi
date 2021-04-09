@@ -21,7 +21,6 @@ class App extends Component {
       recommendationMovies: [],
     };
     this.apiKey = "573f0420d5d47830c0592ee519cc5184";
-    this.chosenFilmsForWatched = [];
   }
 
   getGenres = () => {
@@ -126,18 +125,19 @@ class App extends Component {
 
   moveToWatched = (event) => {
     event.stopPropagation();
+    let chosenFilmsForWatched = [];
 
     if (
       localStorage.chosenFilmsForWatched &&
       localStorage.chosenFilmsForWatched.length != 0
     ) {
-      this.chosenFilmsForWatched = [
+      chosenFilmsForWatched = [
         ...localStorage.chosenFilmsForWatched.split(","),
       ];
     }
 
-    this.chosenFilmsForWatched.push(event.target.dataset.id);
-    localStorage.setItem("chosenFilmsForWatched", this.chosenFilmsForWatched);
+    chosenFilmsForWatched.push(event.target.dataset.id);
+    localStorage.setItem("chosenFilmsForWatched", chosenFilmsForWatched);
   };
 
   deleteFromWatched = (event) => {
