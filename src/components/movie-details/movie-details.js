@@ -18,18 +18,14 @@ const MovieDetails = (props) => {
     clazz = "many-details";
   } else {
     clazz = "few-details";
-  };
-  
+  }
+
   return (
     <div>
       <div className="container">
-        <div
-          className="row"
-          onClick={props.closeMovieDetails}
-          style={{ cursor: "pointer", paddingTop: 50 }}
-        >
+        <div className="row row-arrow" onClick={props.closeMovieDetails}>
           <i className="fas fa-arrow-left"></i>
-          <span style={{ marginLeft: 10 }}>Go Back</span>
+          <span className="arrow-title">Go Back</span>
         </div>
         <div className="row">
           <div className="col s12 m4">

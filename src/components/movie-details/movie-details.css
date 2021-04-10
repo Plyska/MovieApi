@@ -61,3 +61,10 @@
 .ganres {
   margin-right: 10px;
 }
+.row-arrow {
+  cursor: pointer;
+  padding-top: 50px;
+}
+.arrow-title {
+  margin-left: 10px;
+}

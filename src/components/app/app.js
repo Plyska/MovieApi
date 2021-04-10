@@ -178,6 +178,7 @@ class App extends Component {
                 recommendationMovies={this.state.recommendationMovies}
                 closeMovieDetails={this.closeMovieDetails}
                 currentMovie={this.state.currentMovie}
+                viewMovieDetails={this.viewMovieDetails}
               />
             )}
 

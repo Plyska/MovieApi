@@ -7,6 +7,8 @@ const RecommendationMovies = ({
   voteAverage,
   genres,
   genreRecommendedMovie,
+  viewMovieDetails,
+  movieId
 }) => {
   let arrGenresText = [];
   let clazz = "";
@@ -31,7 +33,7 @@ const RecommendationMovies = ({
   
   return (
     <div className="col s12 m6 l3">
-      <div className="card">
+      <div className="card" onClick={() => viewMovieDetails(movieId)} >
         <div className="card-image waves-effect waves-block waves-light">
           {image == null ? null : (
             <img
