@@ -18,6 +18,7 @@ class App extends Component {
       currentPage: 1,
       currentMovie: null,
       showPopularMovieList: true,
+      showPopularMovieList: false,
       genres: [],
       recommendationMovies: [],
     };
@@ -186,10 +187,30 @@ class App extends Component {
     });
   };
 
+  changePath = (event) => {
+    if ( event.target.innerHTML === "Watched" ) {
+      this.setState({
+        showWatchedMovieList: true,
+        showPopularMovieList: false
+      })
+    } else if (event.target.innerHTML === "Movies API") {
+      this.setState({
+        showWatchedMovieList: false,
+        showPopularMovieList: true
+      })
+    }
+    else {
+      this.setState({
+        showWatchedMovieList: false,
+        showPopularMovieList: true
+      })
+    }
+  } 
+
   render() {
     return (
       <Router className="app">
-        <Navbar />
+        <Navbar changePath={this.changePath} />
         <Switch>
           <Route exact path="/">
             {this.state.currentMovie === null ? (
@@ -208,6 +229,8 @@ class App extends Component {
               </div>
             ) : (
               <MovieDetails
+                showPopular={this.state.showPopularMovieList}
+                showWatched={this.state.showWatchedMovieList}
                 genres={this.state.genres}
                 recommendationMovies={this.state.recommendationMovies}
                 closeMovieDetails={this.closeMovieDetails}

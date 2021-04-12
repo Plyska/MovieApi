@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./movie.css";
 
 const Movie = ({
@@ -46,7 +47,7 @@ const Movie = ({
   return (
     <div className="col s12 m6 l3">
       <div className="card" onClick={() => viewMovieDetails(movieId)}>
-        <div className="card-image waves-effect waves-block waves-light">
+       <Link to="/"> <div className="card-image waves-effect waves-block waves-light">
           {image == null ? null : (
             <img
               className="img"
@@ -55,10 +56,12 @@ const Movie = ({
             />
           )}
         </div>
+        </Link>
         <div className="card-content">
           <div className="title">{title}</div>
           <div className={clazz}>{voteAverage}</div>
         </div>
+        
         <div className="box-genres">
           {arrGenresText.map((genre, i) => {
             return (

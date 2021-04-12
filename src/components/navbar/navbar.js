@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ changePath }) => {
   return (
     <nav>
       <ul className="nav-links nav-wraper container">
-        <li>
+        <li onClick={(e) => {changePath(e)}}>
           <Link to="/">Movies API</Link>
         </li>
-        <li>
+        <li onClick={(e) => {changePath(e)}}>
           <Link to="/watched">Watched</Link>
         </li>
       </ul>

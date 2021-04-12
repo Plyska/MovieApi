@@ -1,8 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./movie-details.css";
 import RecommendationMovies from "../recommendation-movies";
 
 const MovieDetails = (props) => {
+  let path = "";
+
+  if (props.showPopular) {
+    path = "/";
+  }
+
+  if (props.showWatched) {
+    path = "/watched";
+  }
+
   let arrGenresText = [];
   let clazz = "";
 
@@ -23,10 +34,12 @@ const MovieDetails = (props) => {
   return (
     <div>
       <div className="container">
-        <div className="row row-arrow" onClick={props.closeMovieDetails}>
-          <i className="fas fa-arrow-left"></i>
-          <span className="arrow-title">Go Back</span>
-        </div>
+        <Link to={path}>
+          <div className="row row-arrow" onClick={props.closeMovieDetails}>
+            <i className="fas fa-arrow-left"></i>
+            <span className="arrow-title">Go Back</span>
+          </div>
+        </Link>
         <div className="row">
           <div className="col s12 m4">
             {props.currentMovie.poster_path == null ? null : (
