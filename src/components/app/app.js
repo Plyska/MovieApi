@@ -12,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
+      watchedMovies: [],
       searchTerm: "",
       totalResults: 0,
       currentPage: 1,
@@ -24,7 +25,9 @@ class App extends Component {
   }
 
   getGenres = () => {
-    fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=en-US`)
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=en-US`
+    )
       .then((data) => data.json())
       .then((data) => {
         this.setState({
@@ -34,7 +37,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`
+    )
       .then((data) => data.json())
       .then((data) => {
         this.setState({
@@ -54,7 +59,9 @@ class App extends Component {
         showPopularMovieList: false,
       });
 
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}`)
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerm}`
+      )
         .then((data) => data.json())
         .then((data) => {
           this.setState({
@@ -67,7 +74,9 @@ class App extends Component {
         showPopularMovieList: true,
       });
 
-      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
+      fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`
+      )
         .then((data) => data.json())
         .then((data) => {
           this.setState({
@@ -75,7 +84,7 @@ class App extends Component {
             totalResults: data.total_pages,
           });
         });
-    };
+    }
   };
 
   handleChange = (event) => {
@@ -106,7 +115,9 @@ class App extends Component {
   };
 
   viewMovieDetails = (id) => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${this.apiKey}&language=en-US&page=1`)
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${this.apiKey}&language=en-US&page=1`
+    )
       .then((data) => data.json())
       .then((data) => {
         this.setState({
@@ -137,7 +148,24 @@ class App extends Component {
     }
 
     chosenFilmsForWatched.push(event.target.dataset.id);
-    localStorage.setItem("chosenFilmsForWatched", chosenFilmsForWatched);
+    localStorage.setItem(
+      "chosenFilmsForWatched",
+      chosenFilmsForWatched
+    );
+
+    let watchedMovies = [...this.state.watchedMovies];
+    this.state.movies.forEach((movie) => {
+      if (movie.id == event.target.dataset.id) {
+        watchedMovies.push(movie);
+        console.log(watchedMovies);
+      } else {
+        console.log("123");
+      }
+    });
+
+    this.setState({
+      watchedMovies: watchedMovies,
+    });
   };
 
   deleteFromWatched = (event) => {
@@ -146,10 +174,20 @@ class App extends Component {
     const index = localStorage.chosenFilmsForWatched
       .split(",")
       .findIndex((item) => item == event.target.dataset.id);
-      
+
     const newArr = localStorage.getItem("chosenFilmsForWatched").split(",");
     newArr.splice(index, 1);
     localStorage.setItem("chosenFilmsForWatched", newArr);
+
+    let indx = this.state.watchedMovies.findIndex(
+      (movie) => movie.id == event.target.dataset.id
+    );
+
+    this.state.watchedMovies.splice(indx, 1);
+
+    this.setState({
+      watchedMovies: this.state.watchedMovies,
+    });
   };
 
   render() {
@@ -194,7 +232,7 @@ class App extends Component {
           <Route path="/watched">
             <WatchedList
               state={this.state}
-              movies={this.state.movies}
+              movies={this.state.watchedMovies}
               moveToWatched={this.moveToWatched}
               deleteFromWatched={this.deleteFromWatched}
               viewMovieDetails={this.viewMovieDetails}
