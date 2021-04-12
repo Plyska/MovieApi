@@ -2,17 +2,28 @@ import React from "react";
 import Movie from "../movie";
 
 const WatchedList = ({
+  moviesWatched,
   movies,
   moveToWatched,
   viewMovieDetails,
   genres,
   deleteFromWatched,
 }) => {
+  if (moviesWatched.length === 0) {
+    movies.forEach((movie) => {
+      localStorage.chosenFilmsForWatched.split(",").forEach((id) => {
+        if (movie.id == id) {
+          moviesWatched.push(movie);
+        }
+      })
+
+    })
+  }
   return (
     <div className="container">
       <div className="row">
         <div className="col s12">
-          {movies.map((movie) => {
+          {moviesWatched.map((movie) => {
             return localStorage.chosenFilmsForWatched != undefined ? (
               localStorage.chosenFilmsForWatched
                 .split(",")

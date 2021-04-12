@@ -148,19 +148,15 @@ class App extends Component {
     }
 
     chosenFilmsForWatched.push(event.target.dataset.id);
-    localStorage.setItem(
-      "chosenFilmsForWatched",
-      chosenFilmsForWatched
-    );
+    localStorage.setItem("chosenFilmsForWatched", chosenFilmsForWatched);
 
-    let watchedMovies = [...this.state.watchedMovies];
-    this.state.movies.forEach((movie) => {
-      if (movie.id == event.target.dataset.id) {
-        watchedMovies.push(movie);
-        console.log(watchedMovies);
-      } else {
-        console.log("123");
-      }
+    let watchedMovies = [];
+    localStorage.chosenFilmsForWatched.split(",").forEach((id) => {
+      this.state.movies.forEach((movie) => {
+        if (id == movie.id) {
+          watchedMovies.push({ ...movie });
+        }
+      });
     });
 
     this.setState({
@@ -232,7 +228,8 @@ class App extends Component {
           <Route path="/watched">
             <WatchedList
               state={this.state}
-              movies={this.state.watchedMovies}
+              movies={this.state.movies}
+              moviesWatched={this.state.watchedMovies}
               moveToWatched={this.moveToWatched}
               deleteFromWatched={this.deleteFromWatched}
               viewMovieDetails={this.viewMovieDetails}
